@@ -1,0 +1,3 @@
+name: demo-module-mpo-infra
+runtime: nodejs
+description: Script Pulumi permettant de déployer les ressources Azure pour un module Javascript

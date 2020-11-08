@@ -1,0 +1,27 @@
+name: Promote to prod
+
+on:
+  workflow_dispatch:
+
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Pour avoir accès à des variables plus simples comme GITHUB_REF_SLUG
+      - name: GitHub Slug Action
+        uses: rlespinasse/github-slug-action@3.1.0
+
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          ref: prod
+
+      - name: Fetch main
+        run: git fetch origin main
+
+      - name: Merge Fast-Forward 
+        run: git merge --ff refs/remotes/origin/main
+      
+      - name: Push changes
+        run: git push

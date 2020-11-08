@@ -1,0 +1,4 @@
+encryptionsalt: v1:5V2JQsvHR90=:v1:yo9KP/wDRQY2qlzq:TdNY2HlwBF2O5fxI4DNqdVcqcbCDgg==
+config:
+    azure:environment: public
+    azure:location: CanadaEast

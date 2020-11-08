@@ -1,3 +1,4 @@
 {
-    "main": "mpo-module-demo-dev"
+    "main": "demo-module-mpo-dev",
+    "prod": "demo-module-mpo-prod"
 }

@@ -2,9 +2,8 @@ name: Deploy
 
 on:
   push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+    branches: [main, prod]
+  
   workflow_dispatch:
 
 jobs:
@@ -12,8 +11,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Pour avoir accès à des variables plus simples comme GITHUB_REF_SLUG
+      - name: GitHub Slug Action
+        uses: rlespinasse/github-slug-action@3.1.0
+
       - name: Checkout
         uses: actions/checkout@v2
+
+      - name: Set variables
+        run: |
+          if [ "${GITHUB_REF_SLUG}" == "prod" ]; then
+            echo "NOM_SECRET_PULUMI=PULUMI_CONFIG_PASSPHRASE_PROD" >> $GITHUB_ENV
+          else 
+            echo "NOM_SECRET_PULUMI=PULUMI_CONFIG_PASSPHRASE_DEV" >> $GITHUB_ENV
+          fi
 
       - name: Setup Node.js
         uses: actions/setup-node@v1
@@ -32,7 +43,7 @@ jobs:
           AZURE_STORAGE_KEY: ${{ secrets.AZURE_STORAGE_KEY }}
 
           # Unlock stack
-          PULUMI_CONFIG_PASSPHRASE: ${{ secrets.PULUMI_CONFIG_PASSPHRASE }}
+          PULUMI_CONFIG_PASSPHRASE: ${{ secrets[env.NOM_SECRET_PULUMI] }}
 
           # Connect to Azure
           ARM_SUBSCRIPTION_ID: 792a7eaf-b31d-469c-beaf-fc2f288c70fc

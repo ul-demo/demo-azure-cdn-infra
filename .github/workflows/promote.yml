@@ -25,7 +25,6 @@ jobs:
       
       - name: Push changes
         run: git push
-      - run: git status
 
       - name: pulumi up
         uses: docker://pulumi/actions
@@ -38,6 +37,7 @@ jobs:
           AZURE_STORAGE_KEY: ${{ secrets.AZURE_STORAGE_KEY }}
   
           # Unlock stack
+          PULUMI_STACK_NAME: prod
           PULUMI_CONFIG_PASSPHRASE: ${{ secrets.PULUMI_CONFIG_PASSPHRASE_PROD }}
           
           # Permet à l'action de faire différente logique préalable à l'exécution

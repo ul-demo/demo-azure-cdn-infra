@@ -25,6 +25,7 @@ jobs:
       
       - name: Push changes
         run: git push
+      - run: git status
 
       - name: pulumi up
         uses: docker://pulumi/actions

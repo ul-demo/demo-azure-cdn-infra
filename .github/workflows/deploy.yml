@@ -46,10 +46,10 @@ jobs:
           PULUMI_CONFIG_PASSPHRASE: ${{ secrets[env.NOM_SECRET_PULUMI] }}
 
           # Connect to Azure
-          ARM_SUBSCRIPTION_ID: 792a7eaf-b31d-469c-beaf-fc2f288c70fc
-          ARM_CLIENT_ID: ae874ae3-5423-445a-bc29-28bed0ebd661
-          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-          ARM_TENANT_ID: 56778bd5-6a3f-4bd3-a265-93163e4d5bfe
+          #ARM_SUBSCRIPTION_ID: 792a7eaf-b31d-469c-beaf-fc2f288c70fc
+          #ARM_CLIENT_ID: ae874ae3-5423-445a-bc29-28bed0ebd661
+          #ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+          #ARM_TENANT_ID: 56778bd5-6a3f-4bd3-a265-93163e4d5bfe
           
           # Permet à l'action de faire différente logique préalable à l'exécution
           PULUMI_CI: up

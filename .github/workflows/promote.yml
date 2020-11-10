@@ -29,7 +29,7 @@ jobs:
       - name: pulumi up
         uses: docker://pulumi/actions
         with:
-          args: up --skip-preview
+          args: up --skip-preview -s demo-module-mpo-prod
         env:
           # Backend
           PULUMI_BACKEND_URL: --cloud-url azblob://pulumi
@@ -37,7 +37,6 @@ jobs:
           AZURE_STORAGE_KEY: ${{ secrets.AZURE_STORAGE_KEY }}
   
           # Unlock stack
-          PULUMI_STACK_NAME: demo-module-mpo-prod
           PULUMI_CONFIG_PASSPHRASE: ${{ secrets.PULUMI_CONFIG_PASSPHRASE_PROD }}
           
           # Permet à l'action de faire différente logique préalable à l'exécution

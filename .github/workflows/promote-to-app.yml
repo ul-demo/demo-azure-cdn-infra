@@ -1,4 +1,4 @@
-name: Promote to prod
+name: Promote to approbation
 
 on:
   workflow_dispatch:

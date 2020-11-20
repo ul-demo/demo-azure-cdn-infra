@@ -18,10 +18,10 @@ jobs:
           ref: prod
 
       - name: Fetch main
-        run: git fetch origin main
+        run: git fetch origin app
 
       - name: Merge Fast-Forward 
-        run: git merge --ff refs/remotes/origin/main
+        run: git merge --ff refs/remotes/origin/app
       
       - name: Push changes
         run: git push

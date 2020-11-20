@@ -1,4 +1,4 @@
 {
-    "main": "demo-module-mpo-dev",
-    "prod": "demo-module-mpo-prod"
+    "main": "demo-azure-cdn-dev",
+    "prod": "demo-azure-cdn-prod"
 }

@@ -29,7 +29,7 @@ jobs:
       - name: pulumi up
         uses: docker://pulumi/actions
         with:
-          args: up --skip-preview -s demo-module-mpo-prod
+          args: up --skip-preview -s demo-azure-cdn-prod
         env:
           # Backend
           PULUMI_BACKEND_URL: --cloud-url azblob://pulumi

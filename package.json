@@ -1,5 +1,5 @@
 {
-    "name": "demo-module-mpo-infra",
+    "name": "demo-azure-cdn-infra",
     "description": "Script Pulumi permettant de déployer les ressources Azure pour un module Javascript",
     "devDependencies": {
         "@types/node": "^10.0.0"

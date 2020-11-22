@@ -80,8 +80,7 @@ new storageNextgen.ManagementPolicy("managementPolicy", {
                         }
                     },
                     filters: {
-                        blobTypes: ["blockBlob"],
-                        prefixMatch: ["$web/"]
+                        blobTypes: ["blockBlob"]
                     }
                 }
             }

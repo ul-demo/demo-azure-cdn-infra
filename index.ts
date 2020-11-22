@@ -39,6 +39,15 @@ const storageAccount = new azure.storage.Account(storageAccountName, {
     parent: resourceGroup
 });
 
+if (pulumi.getStack().endsWith("-app")) {
+    new azure.storage.Container("artifacts", {
+        name: "artifacts",
+        storageAccountName: storageAccount.name,
+    }, {
+        parent: storageAccount
+    });
+}
+
 const blobService = new storageNextgen.BlobServiceProperties("/default", {
     accountName: storageAccount.name,
     blobServicesName: "/default",

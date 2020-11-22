@@ -68,10 +68,11 @@ new storageNextgen.ManagementPolicy("managementPolicy", {
                             delete: {
                                 daysAfterLastAccessTimeGreaterThan: 30
                             }
-                        }           
+                        }
                     },
                     filters: {
                         blobTypes: ["blockBlob"],
+                        prefixMatch: ["$web/"]
                     }
                 }
             }

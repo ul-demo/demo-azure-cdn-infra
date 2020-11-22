@@ -1,8 +1,15 @@
 encryptionsalt: v1:5V2JQsvHR90=:v1:yo9KP/wDRQY2qlzq:TdNY2HlwBF2O5fxI4DNqdVcqcbCDgg==
 config:
+  azure-nextgen:clientId: ae874ae3-5423-445a-bc29-28bed0ebd661
+  azure-nextgen:clientSecret:
+    secure: v1:+TVznFvnSW15UbbO:cRLsx6uh95cXZgsNgItScB88iQkTvvLzykp05wlRVgF1QKselPVmxhKq1o1RuYpLkF8=
+  azure-nextgen:environment: public
+  azure-nextgen:location: CanadaEast
+  azure-nextgen:subscriptionId: 792a7eaf-b31d-469c-beaf-fc2f288c70fc
+  azure-nextgen:tenantId: 56778bd5-6a3f-4bd3-a265-93163e4d5bfe
   azure:clientId: ae874ae3-5423-445a-bc29-28bed0ebd661
   azure:clientSecret:
-    secure: v1:ul6OO5NSBLWH/eTL:L/YOBeqZKVxis7/4WTZPnWPi1xTHiVXXTay2FYGMYEziSy6K3bInxV6NnVvVzZRFufI=
+    secure: v1:CaseLecI0/m3kARW:Pknmo7G50Ct8DEYYUkLs0GVOzL+qt7a5oLFT/cWchZSVjcIEvU5VclUbqkRp8/61qcE=
   azure:environment: public
   azure:location: CanadaEast
   azure:subscriptionId: 792a7eaf-b31d-469c-beaf-fc2f288c70fc

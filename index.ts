@@ -1,5 +1,7 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as azure from "@pulumi/azure";
+import * as azureNextgen from "@pulumi/azure-nextgen";
+import * as storageNextgen from "@pulumi/azure-nextgen/storage/v20200801preview";
 
 const projectName = pulumi.getProject();
 const stackName = pulumi.getStack();
@@ -36,6 +38,48 @@ const storageAccount = new azure.storage.Account(storageAccountName, {
 }, {
     parent: resourceGroup
 });
+
+const blobService = new storageNextgen.BlobServiceProperties("/default", {
+    accountName: storageAccount.name,
+    blobServicesName: "/default",
+    resourceGroupName: resourceGroup.name,
+    lastAccessTimeTrackingPolicy: {
+        enable: true,
+        blobType: ["blockBlob"],
+        name: "AccessTimeTracking"
+    },
+}, {
+    parent: storageAccount
+});
+
+new storageNextgen.ManagementPolicy("managementPolicy", {
+    managementPolicyName: "default",
+    accountName: storageAccount.name,
+    resourceGroupName: resourceGroup.name,
+    policy: {
+        rules: [
+            {
+                name: "delete-not-accessed-after",
+                enabled: true,
+                type: "Lifecycle",
+                definition: {
+                    actions: {
+                        baseBlob: {
+                            delete: {
+                                daysAfterLastAccessTimeGreaterThan: 30
+                            }
+                        }           
+                    },
+                    filters: {
+                        blobTypes: ["blockBlob"],
+                    }
+                }
+            }
+        ]
+    }
+}, {
+    parent: blobService
+})
 
 // We can add a CDN in front of the website
 const cdn =  new azure.cdn.Profile(cdnProfileName, {

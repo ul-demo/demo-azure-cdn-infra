@@ -1,4 +1,5 @@
 /bin/
 /node_modules/
 login-dev.cmd
+login-dev.sh
 login-prod.cmd

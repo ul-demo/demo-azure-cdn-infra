@@ -24,6 +24,6 @@ jobs:
         run: |
           git config user.email "github@ulaval.ca"
           git config user.name "Github actions"
-          tagName=v`TZ=America/New_York date +"%Y-%m-%d-%H-%M-%S%z"`
+          tagName=v`TZ=America/New_York date +"%Y-%m-%d-%H-%M-%S"`
           git tag -m "Release to prod" -f $tagName
           git push origin $tagName

@@ -1,13 +1,13 @@
 name: 'Pulumi up'
 description: "Permet d'exécuter la commande pulumi up"
 inputs:
-  stack:
-    description: 'Nom de la stack à déployer'
-    required: true
-  azure-storage-key:
+  pulumi-azure-storage-key:
     description: 'La clé pour accéder au partage commun de Pulumi'
     required: true
-  passphrase:
+  pulumi-stack:
+    description: 'Nom de la stack à déployer'
+    required: true
+  pulumi-stack-passphrase:
     description: 'Le mot de passe pour déchiffrer la stack de pulumi'
     required: true
   
@@ -16,6 +16,6 @@ runs:
   image: 'docker://ghcr.io/ul-exp/docker-pulumi-azure/main:latest'
   entrypoint: '.github/actions/pulumi-up/pulumi-up.sh'
   args:
-    - ${{ inputs.stack }}
-    - ${{ inputs.azure-storage-key }}
-    - ${{ inputs.passphrase }}
+    - ${{ inputs.pulumi-stack }}
+    - ${{ inputs.pulumi-azure-storage-key }}
+    - ${{ inputs.pulumi-stack-passphrase }}

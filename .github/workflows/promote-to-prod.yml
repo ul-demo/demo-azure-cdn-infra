@@ -11,20 +11,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          ref: prod
-
-      - name: Fetch app
-        run: git fetch origin app
-
-      - name: Merge Fast-Forward 
-        run: git merge --ff refs/remotes/origin/app
-      
-      - name: Push changes
-        run: git push
+          ref: main
 
       - name: Pulumi up
         uses: ./.github/actions/pulumi-up
         with:
-          stack: demo-azure-cdn-prod
-          azure-storage-key: ${{ secrets.AZURE_STORAGE_KEY }}
-          passphrase: ${{ secrets.PULUMI_CONFIG_PASSPHRASE_PROD }}
+          pulumi-stack: demo-azure-cdn-prod
+          pulumi-azure-storage-key: ${{ secrets.AZURE_STORAGE_KEY }}
+          pulumi-passphrase: ${{ secrets.PULUMI_CONFIG_PASSPHRASE_PROD }}
+
+      - name: Create tag
+        run: |
+          git config user.email "github@ulaval.ca"
+          git config user.name "Github actions"
+          tagName=v`TZ=America/New_York date +"%Y-%m-%d-%H-%M-%S%z"`
+          git tag -m "Release to prod" -f $tagName
+          git push origin $tagName

@@ -11,20 +11,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          ref: app
-
-      - name: Fetch main
-        run: git fetch origin main
-
-      - name: Merge Fast-Forward 
-        run: git merge --ff refs/remotes/origin/main
+          ref: main
       
-      - name: Push changes
-        run: git push
+      - name: Merge Fast-Forward to develop
+        run: |
+          git fetch origin develop
+          git merge --ff refs/remotes/origin/develop
 
       - name: Pulumi up
         uses: ./.github/actions/pulumi-up
         with:
-          stack: demo-azure-cdn-app
-          azure-storage-key: ${{ secrets.AZURE_STORAGE_KEY }}
-          passphrase: ${{ secrets.PULUMI_CONFIG_PASSPHRASE_APP }}
+          pulumi-azure-storage-key: ${{ secrets.AZURE_STORAGE_KEY }}
+          pulumi-stack: demo-azure-cdn-app
+          pulumi-stack-passphrase: ${{ secrets.PULUMI_CONFIG_PASSPHRASE_APP }}
+      
+      - name: Push changes
+        run: git push origin main

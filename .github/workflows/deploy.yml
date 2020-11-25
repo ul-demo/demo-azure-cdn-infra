@@ -2,7 +2,7 @@ name: Deploy
 
 on:
   push:
-    branches: main
+    branches: [main, develop]
   
   workflow_dispatch:
 
@@ -11,12 +11,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Set variables
+        run: |
+          if [[ "${GITHUB_REF}" == refs/heads/main ]]; then
+            echo "PULUMI_STACK=demo-azure-cdn-app" >> $GITHUB_ENV
+            echo "PULUMI_STACK_PASSPHRASE=${{ secrets.PULUMI_CONFIG_PASSPHRASE_APP }}" >> $GITHUB_ENV
+          else
+            echo "PULUMI_STACK=demo-azure-cdn-dev" >> $GITHUB_ENV
+            echo "PULUMI_STACK_PASSPHRASE=${{ secrets.PULUMI_CONFIG_PASSPHRASE_DEV }}" >> $GITHUB_ENV
+          fi
+
       - name: Checkout
         uses: actions/checkout@v2
 
       - name: Pulumi up
         uses: ./.github/actions/pulumi-up
         with:
-          stack: demo-azure-cdn-dev
-          azure-storage-key: ${{ secrets.AZURE_STORAGE_KEY }}
-          passphrase: ${{ secrets.PULUMI_CONFIG_PASSPHRASE_DEV }}
+          pulumi-azure-storage-key: ${{ secrets.AZURE_STORAGE_KEY }}
+          pulumi-stack: ${{ env.PULUMI_STACK }}
+          pulumi-stack-passphrase: ${{ env.PULUMI_STACK_PASSPHRASE }}

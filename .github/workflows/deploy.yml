@@ -27,6 +27,7 @@ jobs:
       - name: Pulumi up
         uses: ./.github/actions/pulumi-up
         with:
+          pulumi-azure-storage-account: ${{ secrets.PULUMI_AZURE_STORAGE_ACCOUNT }}
           pulumi-azure-storage-key: ${{ secrets.PULUMI_AZURE_STORAGE_KEY }}
           pulumi-stack: ${{ env.PULUMI_STACK }}
           pulumi-stack-passphrase: ${{ env.PULUMI_STACK_PASSPHRASE }}

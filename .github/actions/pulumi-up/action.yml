@@ -1,6 +1,9 @@
 name: 'Pulumi up'
 description: "Permet d'exécuter la commande pulumi up"
 inputs:
+  pulumi-azure-storage-account:
+    description: Le nom du storage account d'Azure contenant le partage commun de Pulumi
+    required: true
   pulumi-azure-storage-key:
     description: 'La clé pour accéder au partage commun de Pulumi'
     required: true
@@ -16,6 +19,7 @@ runs:
   image: 'docker://ghcr.io/ul-exp/docker-pulumi-azure/main:latest'
   entrypoint: '.github/actions/pulumi-up/pulumi-up.sh'
   args:
-    - ${{ inputs.pulumi-stack }}
+    - ${{ inputs.pulumi-azure-storage-account }}
     - ${{ inputs.pulumi-azure-storage-key }}
+    - ${{ inputs.pulumi-stack }}
     - ${{ inputs.pulumi-stack-passphrase }}

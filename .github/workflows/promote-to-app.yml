@@ -15,8 +15,8 @@ jobs:
       
       - name: Merge Fast-Forward to develop
         run: |
-          git fetch origin develop
-          git merge --ff refs/remotes/origin/develop
+          git fetch origin develop:develop_tmp
+          git merge --ff develop_tmp
 
       - name: Pulumi up
         uses: ./.github/actions/pulumi-up

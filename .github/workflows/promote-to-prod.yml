@@ -18,7 +18,7 @@ jobs:
         with:
           pulumi-azure-storage-key: ${{ secrets.PULUMI_AZURE_STORAGE_KEY }}
           pulumi-stack: demo-azure-cdn-prod
-          pulumi-passphrase: ${{ secrets.PULUMI_STACK_PASSPHRASE_PROD }}
+          pulumi-stack-passphrase: ${{ secrets.PULUMI_STACK_PASSPHRASE_PROD }}
 
       - name: Create tag
         run: |

@@ -21,9 +21,9 @@ jobs:
       - name: Pulumi up
         uses: ./.github/actions/pulumi-up
         with:
-          pulumi-azure-storage-key: ${{ secrets.AZURE_STORAGE_KEY }}
+          pulumi-azure-storage-key: ${{ secrets.PULUMI_AZURE_STORAGE_KEY }}
           pulumi-stack: demo-azure-cdn-app
-          pulumi-stack-passphrase: ${{ secrets.PULUMI_CONFIG_PASSPHRASE_APP }}
+          pulumi-stack-passphrase: ${{ secrets.PULUMI_STACK_PASSPHRASE_APP }}
       
       - name: Push changes
         run: git push origin main

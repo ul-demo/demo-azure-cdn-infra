@@ -15,10 +15,10 @@ jobs:
         run: |
           if [[ "${GITHUB_REF}" == refs/heads/main ]]; then
             echo "PULUMI_STACK=demo-azure-cdn-app" >> $GITHUB_ENV
-            echo "PULUMI_STACK_PASSPHRASE=${{ secrets.PULUMI_CONFIG_PASSPHRASE_APP }}" >> $GITHUB_ENV
+            echo "PULUMI_STACK_PASSPHRASE=${{ secrets.PULUMI_STACK_PASSPHRASE_APP }}" >> $GITHUB_ENV
           else
             echo "PULUMI_STACK=demo-azure-cdn-dev" >> $GITHUB_ENV
-            echo "PULUMI_STACK_PASSPHRASE=${{ secrets.PULUMI_CONFIG_PASSPHRASE_DEV }}" >> $GITHUB_ENV
+            echo "PULUMI_STACK_PASSPHRASE=${{ secrets.PULUMI_STACK_PASSPHRASE_DEV }}" >> $GITHUB_ENV
           fi
 
       - name: Checkout
@@ -27,6 +27,6 @@ jobs:
       - name: Pulumi up
         uses: ./.github/actions/pulumi-up
         with:
-          pulumi-azure-storage-key: ${{ secrets.AZURE_STORAGE_KEY }}
+          pulumi-azure-storage-key: ${{ secrets.PULUMI_AZURE_STORAGE_KEY }}
           pulumi-stack: ${{ env.PULUMI_STACK }}
           pulumi-stack-passphrase: ${{ env.PULUMI_STACK_PASSPHRASE }}

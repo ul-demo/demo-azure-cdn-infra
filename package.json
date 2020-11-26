@@ -5,6 +5,9 @@
         "@types/node": "^10.0.0"
     },
     "dependencies": {
+        "@azure/arm-cdn": "^5.2.0",
+        "@azure/ms-rest-js": "^2.1.0",
+        "@azure/ms-rest-nodeauth": "^3.0.6",
         "@pulumi/pulumi": "^2.14.0",
         "@pulumi/azure": "^3.31.1",
         "@pulumi/azure-nextgen": "0.2.7"

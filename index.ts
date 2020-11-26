@@ -1,10 +1,13 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as azure from "@pulumi/azure";
-import * as azureNextgen from "@pulumi/azure-nextgen";
 import * as storageNextgen from "@pulumi/azure-nextgen/storage/v20200801preview";
+import { CDNCustomDomainResource } from "./customdomain";
 
 const projectName = pulumi.getProject();
 const stackName = pulumi.getStack();
+
+// Assurez-vous d'avoir un CNAME au niveau du DNS qui pointe vers votre endpoint
+const customDomain = stackName === "demo-azure-cdn-prod" ? "demo-azure.app.ulaval.ca" : null;
 const objectName = `frpol9-${stackName}`;
 const resourceGroupName = `${objectName}-rg`;
 const storageAccountName = `${objectName}st`.replace(/-/g, '').substr(0, 24);
@@ -127,6 +130,24 @@ const endpoint = new azure.cdn.Endpoint(cdnEndpointName, {
 }, {
     parent: resourceGroup
 });
+
+if (customDomain) {
+    new CDNCustomDomainResource("cdnCustomDomain", {
+        resourceGroupName: resourceGroupName,
+        profileName: cdnProfileName,
+        endpointName: cdnEndpointName,
+        customDomainHostName: customDomain,
+        
+        // This will enable HTTPS through Azure's one-click
+        // automated certificate deployment.
+        // The certificate is fully managed by Azure from provisioning
+        // to automatic renewal at no additional cost to you.
+        httpsEnabled: true,
+        
+    }, { 
+        parent: endpoint
+    });
+}
 
 export const staticWebsiteEndpoint = storageAccount.primaryWebEndpoint;
 export const cdnEndpoint = pulumi.interpolate`https://${endpoint.hostName}/`;

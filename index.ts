@@ -112,6 +112,8 @@ const endpoint = new azure.cdn.Endpoint(cdnEndpointName, {
         name: "blobstorage",
         hostName: storageAccount.primaryWebHost,
     }],
+    isCompressionEnabled: true,
+    contentTypesToCompresses: ["text/html", "text/css", "text/javascript", "application/javascript"],
     deliveryRules: [
         {
             order: 1,

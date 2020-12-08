@@ -50,9 +50,15 @@ Exécuter :
 pulumi config set azure:environment public
 pulumi config set azure:location CanadaEast
 pulumi config set azure:subscriptionId <id subscription>
-pulumi config set azure:tenantId: <id tenant>
+pulumi config set azure:tenantId <id tenant>
 pulumi config set azure:clientId <guid compte Azure pour se connecter>
 pulumi config set --secret azure:clientSecret <mot de passe compte Azure>
+pulumi config set azure-nextgen:environment public
+pulumi config set azure-nextgen:location CanadaEast
+pulumi config set azure-nextgen:subscriptionId <id subscription>
+pulumi config set azure-nextgen:tenantId <id tenant>
+pulumi config set azure-nextgen:clientId <guid compte Azure pour se connecter>
+pulumi config set --secret azure-nextgen:clientSecret <mot de passe compte Azure>
 ```
 ## Déployer les ressources
 ```

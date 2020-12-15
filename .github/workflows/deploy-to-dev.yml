@@ -1,32 +1,27 @@
-name: Promote to approbation
+name: Deploy to dev
 
 on:
+  push:
+    branches: [develop]
+  
   workflow_dispatch:
 
 jobs:
-  promote:
+  deploy:
     runs-on: ubuntu-latest
 
-    environment: app
-
+    environment: dev
+    
     steps:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          ref: main
-      
-      - name: Merge Fast-Forward to develop
-        run: |
-          git fetch origin develop:develop_tmp
-          git merge --ff develop_tmp
+          ref: develop
 
       - name: Pulumi up
         uses: ./.github/actions/pulumi-up
         with:
           pulumi-azure-storage-account: ${{ secrets.PULUMI_AZURE_STORAGE_ACCOUNT }}
           pulumi-azure-storage-key: ${{ secrets.PULUMI_AZURE_STORAGE_KEY }}
-          pulumi-stack: demo-azure-cdn-app
+          pulumi-stack: demo-azure-cdn-dev
           pulumi-stack-passphrase: ${{ secrets.PULUMI_STACK_PASSPHRASE }}
-      
-      - name: Push changes
-        run: git push origin main

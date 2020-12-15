@@ -1,27 +1,27 @@
-name: Deploy to dev
+name: Deploy to app
 
 on:
   push:
-    branches: [develop]
+    branches: [main]
   
   workflow_dispatch:
 
 jobs:
-  deploy-to-dev:
+  deploy-to-app:
     runs-on: ubuntu-latest
 
-    environment: dev
+    environment: app
     
     steps:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          ref: develop
+          ref: main
 
       - name: Pulumi up
         uses: ./.github/actions/pulumi-up
         with:
           pulumi-azure-storage-account: ${{ secrets.PULUMI_AZURE_STORAGE_ACCOUNT }}
           pulumi-azure-storage-key: ${{ secrets.PULUMI_AZURE_STORAGE_KEY }}
-          pulumi-stack: demo-azure-cdn-dev
+          pulumi-stack: demo-azure-cdn-app
           pulumi-stack-passphrase: ${{ secrets.PULUMI_STACK_PASSPHRASE }}

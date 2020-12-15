@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  promote:
+  promote-to-prod:
     runs-on: ubuntu-latest
 
     environment: prod

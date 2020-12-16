@@ -32,6 +32,9 @@ set PULUMI_CONFIG_PASSPHRASE=xxx
 pulumi login --cloud-url azblob://pulumi
 ```
 
+Le script login.cmd permet d'automatiser cette configuration en utilisant une voute de secrets hébergées
+sur Azure.
+
 ## Pour créer une nouvelle stack
 Pulumi utilise la notion de "stack" pour supporter plusieurs environnemnet d'une même infrastructure.
 
@@ -69,3 +72,8 @@ pulumi up
 ```
 pulumi stack select demo-azure-cdn-dev
 ```
+
+## Notes
+Si vous faites une copie privée de ce repo, vous aurez besoin de légèrement modifier les GitHub actions
+afin de tenir compte du fait que la gestin des environnements n'est pas encore supportée pour les repos
+privés.

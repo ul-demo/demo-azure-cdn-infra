@@ -16,7 +16,7 @@ inputs:
   
 runs:
   using: 'docker'
-  image: 'docker://ghcr.io/ul-exp/docker-pulumi-azure/main:latest'
+  image: 'docker://ghcr.io/ul-demo/docker-pulumi-azure/main:latest'
   entrypoint: '.github/actions/pulumi-up/pulumi-up.sh'
   args:
     - ${{ inputs.pulumi-azure-storage-account }}
